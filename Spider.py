@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 import pdfkit
 import time
 
-from ParseOut import ParseOutYear, ParseOutTitle, ParseOutContent, ParseOutTag, ParseOutURL
+from ParseOut import ParseOutYear, ParseOutTitle, ParseOutContent, ParseOutTag, ParseOutURL,ParseOutAuthor
 
 class Spider:
 
@@ -19,10 +19,11 @@ class Spider:
                  score_level=0,
                  key_score={'p': 1, 'n': -3, 'p_none': 1, 'n_none': -1, 'none': -5},
                  weighting={'title': 1.5, 'content': 1},
-                 page=5,
+                 page=20,
                  parser='html.parser',
-                 googleScholarURL="http://scholar.google.com.tw"):
+                 googleScholarURL="https://scholar.google.com.hk/"):
         self.url = url
+        
         self.p_key = p_key
         self.n_key = n_key
         self.score_level = score_level
@@ -43,8 +44,8 @@ class Spider:
         for index, page_url in enumerate(page_urls):
             res = requests.get(page_url)
             soup = BeautifulSoup(res.text, self.parser)
-            print "You are now in page ", (index + 1), " !!!"
-
+           #print ("[You are now in page " (index + 1).str " !!!]") 
+            print(index)
             ### Test if the crawler is blocked by the Google robot check
             page_links = soup.select('div[id="gs_nml"] a')
             if not page_links:
@@ -53,7 +54,7 @@ class Spider:
 
             ### Try to crawl the page no matter it might be banned by Google robot check
             results += self.__crawlPage(soup, index + 1)
-            time.sleep(4)
+            time.sleep(20)
 
         return results
 
@@ -113,12 +114,21 @@ class Spider:
                 continue
 
             try:
-                b_year = block.select('div[class="gs_a"]')[0].text #Year
-                b_year = ParseOutYear(b_year)
+                b_test = block.select('div[class="gs_a"]')[0].text #Year
+                b_year = ParseOutYear(b_test)
+                b_author = ParseOutAuthor(b_test)
+                #print(b_author)
+                #print(b_test)
+                result['author'] = b_author
+                #print[b_author]
                 result['year'] = b_year
             except:
                 logger.debug("No Year in Page %s Block %s", page_index, counter)
                 result['year'] = None
+
+           
+           
+            
 
             ### Check keywords in titles and contents
             ### Evaluate the score of titles and contents by keywords

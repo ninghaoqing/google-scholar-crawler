@@ -25,6 +25,17 @@ def ParseOutURL(text):
         url = None
         return None
 
+def ParseOutAuthor(text):
+
+    #author= text.split(",")
+    author = re.split(r'[\u2026,-]',text)
+  #  print(author)
+    if author :
+        return author
+    else: 
+        author= 0
+        return author 
+
 def ParseOutYear(text):
     """
     Parse out year from the form [, year ]
@@ -97,12 +108,12 @@ def ThesisScore(text, p_key, n_key, key_score):
         return score
 
 def remove_punctuation(s_in, s_to=u' '):
-    if isinstance(s_in, unicode):
+    if isinstance(s_in, str):
         not_letters = u'!"#%\'()*+,-./:;<=>?@[\]^_`{|}~\n'
         trans_table = dict((ord(char), s_to) for char in not_letters)
         return s_in.translate(trans_table)
     else:
-         return s_in.translate(string.maketrans("", ""), string.punctuation)
+         return s_in.translate(str.maketrans("", ""), string.punctuation)
 
 def main():
     s1 = r"L Gun-Jae, P Byoung-Uk, Y Dong-Gu… - ICEIC: International …, 2004 - dev02.dbpia.co.kr"
@@ -125,7 +136,7 @@ def main():
     s8 = '[PDF] semanticscholar.org'
     s9 = ''
     tag = ParseOutTag(s8)
-    print type(tag)
+    #print type(tag)
 
 if __name__ == '__main__':
     main()

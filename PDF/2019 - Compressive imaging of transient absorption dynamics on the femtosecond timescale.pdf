@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha</title>
+    <link href="/captcha/Content/bootstrap.css" rel="stylesheet"/>
+<link href="/captcha/Content/site.css" rel="stylesheet"/>
+
+    <script src="/captcha/Scripts/modernizr-2.6.2.js"></script>
+
+    <link href="/captcha/BotDetectCaptcha.ashx?get=layout-stylesheet" rel="stylesheet"/>
+
+</head>
+<body>
+    <div class="container body-content">
+        
+
+<style>
+	@font-face{font-family:"puzzle a";src:url("./fonts/font_a_590a49a8503dab60bac5a9be7ef8a7c7.woff");}
+	@font-face{font-family:"puzzle b";src:url("./fonts/font_b_590a49a8503dab60bac5a9be7ef8a7c7.woff");}
+    h1{
+        font-size: 72px;
+        letter-spacing: 10px;
+    }
+	.puzzle{
+		font-family:"puzzle a","puzzle b";
+	}
+</style>
+<p>OSA has implemented a process that requires you to enter the letters and/or numbers below before you can download this article.</p>
+<br/>
+<div>
+<form action="/captcha/" method="post"><input data-val="true" data-val-required="The Id field is required." id="Id" name="Id" type="hidden" value="2d15dcde-c1ea-ebd3-a5e3-79d0490952e4" />        <h1 class="puzzle">&#216;&#248;&#203;&#219;&#219;</h1>
+<input data-val="true" data-val-required="The Answer field is required." id="Answer" name="Answer" type="text" value="" /><span>&nbsp; &nbsp;</span>
+        <input type="submit" value="Submit" /><span>&nbsp; &nbsp;</span>
+<span class="field-validation-valid" data-valmsg-for="Answer" data-valmsg-replace="true"></span></form></div>
+    </div>
+
+    <script src="/captcha/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="/captcha/Scripts/bootstrap.js"></script>
+<script src="/captcha/Scripts/respond.js"></script>
+
+    
+</body>
+</html>
